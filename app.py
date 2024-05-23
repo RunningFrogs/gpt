@@ -14,8 +14,8 @@ def generate_text(prompt):
 # Erstellen der Gradio-Oberfläche
 iface = gr.Interface(
     fn=generate_text,
-    inputs=gr.inputs.Textbox(lines=4, placeholder="Enter your prompt here", label="Prompt"),
-    outputs=gr.outputs.Textbox(label="Response"),
+    inputs=gr.Textbox(lines=4, placeholder="Enter your prompt here", label="Prompt"),
+    outputs=gr.Textbox(label="Response"),
     title="GPT-4-All Interface"
 )
 
