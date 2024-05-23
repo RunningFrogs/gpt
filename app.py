@@ -1,9 +1,15 @@
 import gradio as gr
 from gpt4all import GPT4All
 
-# Laden Sie mehrere Modelle (angenommen, Sie haben mehrere Modelle zur Auswahl)
-model_names = ["Llama 3 Instruct"]
-models = {name: GPT4All(model=name) for name in model_names}
+# Definieren Sie die Modellpfade
+model_paths = {
+    "Model 1": "/path/to/your/model1.bin",
+    "Model 2": "/path/to/your/model2.bin",
+    "Model 3": "/path/to/your/model3.bin"
+}
+
+# Laden Sie die Modelle
+models = {name: GPT4All(model=path) for name, path in model_paths.items()}
 
 def generate_text(model_name, prompt):
     model = models[model_name]
@@ -14,7 +20,7 @@ def generate_text(model_name, prompt):
 iface = gr.Interface(
     fn=generate_text,
     inputs=[
-        gr.inputs.Dropdown(choices=model_names, label="Choose Model"),
+        gr.inputs.Dropdown(choices=list(model_paths.keys()), label="Choose Model"),
         gr.inputs.Textbox(lines=4, placeholder="Enter your prompt here", label="Prompt")
     ],
     outputs=gr.outputs.Textbox(label="Response"),
